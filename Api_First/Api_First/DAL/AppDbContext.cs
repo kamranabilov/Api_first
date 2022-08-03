@@ -1,4 +1,5 @@
-﻿using Api_First.Models;
+﻿using Api_First.DAL.Configurations;
+using Api_First.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ namespace Api_First.DAL
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CarConfiguration());
+        }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Engine> Engines { get; set; }
     }
+
 }

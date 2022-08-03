@@ -7,10 +7,16 @@
   <ItemGroup>
     <Compile Remove="Migrations\20220803033853_createDbCarTable.cs" />
     <Compile Remove="Migrations\20220803033853_createDbCarTable.Designer.cs" />
+    <Compile Remove="Migrations\20220803205645_EditCarModel.cs" />
+    <Compile Remove="Migrations\20220803205645_EditCarModel.Designer.cs" />
+    <Compile Remove="Migrations\20220803220902_createEnginModel.cs" />
+    <Compile Remove="Migrations\20220803220902_createEnginModel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Castle.Windsor" Version="5.1.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.27">

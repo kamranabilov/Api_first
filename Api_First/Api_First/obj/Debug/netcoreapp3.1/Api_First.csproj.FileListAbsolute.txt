@@ -64,3 +64,7 @@ E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Castle.Core.dll
 E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Castle.Windsor.dll
 E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\FluentValidation.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll
+E:\4. Api\Api_First\Api_First\obj\Debug\netcoreapp3.1\Api_First.MvcApplicationPartsAssemblyInfo.cs
