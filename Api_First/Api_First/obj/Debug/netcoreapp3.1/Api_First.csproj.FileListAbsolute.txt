@@ -68,3 +68,12 @@ E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\FluentValidation.dll
 E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
 E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll
 E:\4. Api\Api_First\Api_First\obj\Debug\netcoreapp3.1\Api_First.MvcApplicationPartsAssemblyInfo.cs
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\AutoMapper.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+E:\4. Api\Api_First\Api_First\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll

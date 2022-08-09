@@ -15,7 +15,7 @@ namespace Api_First.Models
         //[Column(TypeName = "decimal(6.2)")]
         public decimal Price { get; set; }       
         public string Color { get; set; }
-        public bool Display { get; set; }
+        public bool? Display { get; set; }
         public Engine Engine { get; set; }
         public int? EngineId { get; set; }
     }

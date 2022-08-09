@@ -12,6 +12,8 @@ namespace Api_First.DTOs.Car
         public string Model { get; set; }
         public decimal Price { get; set; }
         public string Color { get; set; }
-        public bool Display { get; set; }
+        public bool? Display { get; set; }
+        public EngineInCarGetDto Engine { get; set; }
     }
+   
 }

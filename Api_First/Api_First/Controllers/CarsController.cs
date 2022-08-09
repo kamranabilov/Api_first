@@ -2,8 +2,10 @@
 using Api_First.DTOs;
 using Api_First.DTOs.Car;
 using Api_First.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,12 @@ namespace Api_First.Controllers
     public class CarsController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public CarsController(AppDbContext context)
+        private readonly IMapper _mapper;
+
+        public CarsController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         //private List<Car> _cars = new List<Car>()
         //{
@@ -65,38 +70,63 @@ namespace Api_First.Controllers
         [Route("get/{id}")]
         public IActionResult Get(int id)
         {
-            Car car = _context.Cars.FirstOrDefault(c=>c.Id==id);
-            CarGetDto getDto= new CarGetDto
-            {
-                Id = car.Id,
-                Brand = car.Brand,
-                Model = car.Model,
-                Price = car.Price,
-                Color = car.Color,
-                Display = car.Display
-            };
-            if (car is null) return StatusCode(StatusCodes.Status404NotFound);
-            return Ok(getDto);
+            Car car = _context.Cars.Include(c=>c.Engine).ThenInclude(c=>c.Cars).FirstOrDefault(c=>c.Id==id);
+            CarGetDto dto = _mapper.Map<CarGetDto>(car);
+            //CarGetDto getDto = new CarGetDto
+            //{
+            //    Id = car.Id,
+            //    Brand = car.Brand,
+            //    Model = car.Model,
+            //    Price = car.Price,
+            //    Color = car.Color,
+            //    Display = car.Display,
+            //    Engine = new EngineInCarGetDto
+            //    {
+            //        Id = car.EngineId,
+            //        Name = car.Engine.Name,
+            //        CarsCount = car.Engine.Cars.Count()
+            //    } 
+            //};
+            //if (car is null) return StatusCode(StatusCodes.Status404NotFound);
+            return Ok(dto);
         }
 
         [HttpGet]
         [Route("getall")]
         public IActionResult GetAll(int page = 1, string search = null)
         {
-            //List<Car> cars = _context.Cars.Where(c => c.Display == true).Skip((page - 1)*4).Take(4).ToList();
             var query = _context.Cars.AsQueryable();
             if (!string.IsNullOrEmpty(search))
             {
                 query = query.Where(q => q.Brand.Contains(search));
             }
-            CarListDto listDto = new CarListDto
+
+            //List<Car> cars = _context.Cars.Where(c => c.Display == true).Skip((page - 1)*4).Take(4).ToList();
+            List<Car> cars = _context.Cars.Include(c => c.Engine).ThenInclude(e=>e.Cars).Skip((page - 1)*4).Take(4).ToList();
+
+            ListDto<CarListItemDto> Dto = new ListDto<CarListItemDto>
             {
-                CarListItemDtos = query.Select(c => new CarListItemDto { Id = c.Id, Brand = c.Brand, Model = c.Model,
-                    Price = c.Price,Color = c.Color, Display = c.Display })
-                .Skip((page - 1) * 4)
-                .Take(4).ToList(), TotalCount = query.Where(c=>c.Display==true).Count()
+                ListItemDtos = _mapper.Map<List<CarListItemDto>>(cars),
+                //ListItemDtos = query.Include(c=>c.Engine).ThenInclude(e=>e.Cars).Select(c => 
+                //new CarListItemDto 
+                //{ Id = c.Id, 
+                //    Brand = c.Brand, 
+                //    Model = c.Model,
+                //    Price = c.Price,
+                //    Color = c.Color, 
+                //    Display = c.Display,
+                //    Engine = new EngineInCarGetDto
+                //    {
+                //        Id = c.EngineId,
+                //        Name = c.Engine.Name,
+                //        CarsCount = c.Engine.Cars.Count()
+                //    }
+                //})
+                //.Skip((page - 1) * 4)
+                //.Take(4).ToList(), 
+                TotalCount = query.Where(c=>c.Display==true).Count()
             };
-            return Ok(listDto);
+            return Ok(Dto);
         }
 
         [HttpPost]
@@ -104,13 +134,15 @@ namespace Api_First.Controllers
         public async Task<IActionResult> Create(CarPostDto carDto)
         {
             if (carDto is null) return StatusCode(400);
+            if (!_context.Engines.Any(e => e.Id == carDto.EngineId)) return BadRequest();
             Car car = new Car
             {
                 Brand = carDto.Brand,
                 Model = carDto.Model,
                 Price = carDto.Price,
                 Color = carDto.Color,
-                Display = carDto.Display
+                Display = carDto.Display,
+                EngineId = carDto.EngineId 
             };
            await _context.Cars.AddAsync(car);
            await _context.SaveChangesAsync();
